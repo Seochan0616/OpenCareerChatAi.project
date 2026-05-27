@@ -1,3 +1,5 @@
+# careernet.py
+
 import requests
 import streamlit as st
 
@@ -5,46 +7,44 @@ CAREERNET_API_KEY = st.secrets["CAREERNET_API_KEY"]
 
 def search_job(keyword):
 
-```
-url = "https://www.career.go.kr/cnet/openapi/getOpenApi"
+    url = "https://www.career.go.kr/cnet/openapi/getOpenApi"
 
-params = {
-    "apiKey": CAREERNET_API_KEY,
-    "svcType": "api",
-    "svcCode": "JOB",
-    "contentType": "json",
-    "gubun": "job_nm",
-    "searchJobNm": keyword
-}
+    params = {
+        "apiKey": CAREERNET_API_KEY,
+        "svcType": "api",
+        "svcCode": "JOB",
+        "contentType": "json",
+        "gubun": "job_nm",
+        "searchJobNm": keyword
+    }
 
-try:
+    try:
 
-    response = requests.get(url, params=params)
+        response = requests.get(url, params=params)
 
-    data = response.json()
+        data = response.json()
 
-    jobs = []
+        jobs = []
 
-    if "dataSearch" in data:
+        if "dataSearch" in data:
 
-        contents = data["dataSearch"]["content"]
+            contents = data["dataSearch"]["content"]
 
-        for item in contents:
+            for item in contents:
 
-            name = item.get("job_nm", "정보 없음")
-            summary = item.get("summary", "설명 없음")
+                name = item.get("job_nm", "정보 없음")
+                summary = item.get("summary", "설명 없음")
 
-            jobs.append({
-                "name": name,
-                "summary": summary
-            })
+                jobs.append({
+                    "name": name,
+                    "summary": summary
+                })
 
-    return jobs
+        return jobs
 
-except Exception as e:
+    except Exception as e:
 
-    return [{
-        "name": "오류",
-        "summary": str(e)
-    }]
-```
+        return [{
+            "name": "오류",
+            "summary": str(e)
+        }]
