@@ -15,7 +15,7 @@ st.set_page_config(
     page_icon="🎓"
 )
 
-st.title("🎓 AI 교육 공공데이터 기반 진로상담 시스템")
+st.title("🎓 교육 공공데이터 기반 AI 진로상담 시스템")
 
 st.write("당신의 고민과 방향을 함께 탐색합니다.")
 
